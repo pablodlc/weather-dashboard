@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+            integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="./assets/style/style.css" />
+        <title>Weather Dashboard</title>
+    </head>
+
+    <header>
+        <h1 id="title">Weather Dashboard</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-md-3" id="searchCol">
+                    <h3 class="title" id="search">Search for a city</h3>
+            
+                    <input type="text" id="userInput"></input>
+                    <button class="btn-primary" id="searchBtn">Search</button>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 id="city">Tucson</h3>
+                            <p>Temp:<span id="temp"></span></p>
+                            <p>Wind:<span id="wind"></span></p>
+                            <p>Humidity:<span id="humid"></span></p>
+                            <p>UV Index:<span id="uvInd"></span></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h3 id="fiveDay">5 Day Forecast:</h3>
+                    </div>
+
+                    <div class="row">
+                        
+                        <!-- Day 1 of 5-Day Forecast -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title" id="card1">Date +1</h4>
+                                <p>icon PH</p>
+                                <p>Temp: <span id="temp1"></span></p>
+                                <p>Wind: <span id="wind1"></span></p>
+                                <p>Humidity: <span id="humid1"></span></p>
+                            </div>
+                        </div>
+
+                        <!-- Day 2 of 5-Day Forecast -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title" id="card2">Date +2</h4>
+                                <p>icon PH</p>
+                                <p>Temp: <span id="temp2"></span></p>
+                                <p>Wind: <span id="wind2"></span></p>
+                                <p>Humidity: <span id="humid2"></span></p>
+                            </div>
+                        </div>
+
+                        <!-- Day 3 of 5-Day Forecast -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title" id="card3">Date +3</h4>
+                                <p>icon PH</p>
+                                <p>Temp: <span id="temp3"></span></p>
+                                <p>Wind: <span id="wind3"></span></p>
+                                <p>Humidity: <span id="humid3"></span></p>
+                            </div>
+                        </div>
+
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title" id="card4">Date +4</h4>
+                                <p>icon PH</p>
+                                <p>Temp: <span id="temp4"></span></p>
+                                <p>Wind: <span id="wind4"></span></p>
+                                <p>Humidity: <span id="humid4"></span></p>
+                            </div>
+                        </div>
+                        <div class="card">
+
+                            <div class="card-body">
+                                <h4 class="card-title" id="card5">Date +5</h4>
+                                <p>icon PH</p>
+                                <p>Temp: <span id="temp5"></span></p>
+                                <p>Wind: <span id="wind5"></span></p>
+                                <p>Humidity: <span id="humid5"></span></p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="./assets/script/script.js"></script>
+    </body>
+</html>

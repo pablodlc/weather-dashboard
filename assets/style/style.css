@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: space-between;
+}
+
+#searchCol {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#fiveDay {
+    padding: 20px;
+}
