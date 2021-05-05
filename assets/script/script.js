@@ -1,7 +1,10 @@
-var list = JSON.parse(localStorage.getItem("searches")) || [];
+const formEl = document.querySelector("#user-form");
+const cityEl = document.querySelector("#citysearch");
 
-$("#searchBtn").click(function (event) {
+const searchHandler = function (event) {
     event.preventDefault();
+    let city = cityEl.value.trim();
+    alert(city);
+}
 
-    var city = $("#citySearch").val().trim();
-});
+formEl.addEventListener("submit", searchHandler);
