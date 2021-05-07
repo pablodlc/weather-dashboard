@@ -1,8 +1,9 @@
+const key = require("./key.js");
 const formEl = document.querySelector("#user-form");
 const cityEl = document.querySelector("#citysearch");
 
 const searchCity = function (city) {
-    let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=829eec9644d40ff393c122e2b06045e8";
+    let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + key.apiKey;
     fetch(apiUrl)
         .then(function (response) {
             if (response.ok) {
