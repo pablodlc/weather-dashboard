@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     align-items: space-between;
 }
@@ -13,4 +13,10 @@
 
 #fiveDay {
     padding: 20px;
+}
+
+#user-form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }

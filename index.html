@@ -22,100 +22,105 @@
         <h1 id="title">Weather Dashboard</h1>
     </header>
 
-    <main>
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <form id="user-form" class="card-body">
-                        <label class="form-label" for="cityname"
-                            >Search for a city:</label
-                        >
+            <div class="col">
+                    <div class="flex-row">
+                    <!-- The form I need looked suspiciously similar to the one in Git It Done, so I took inspiration here -->
+                    <div class="card">
+                        <form id="user-form" class="card-body">
+                            <label class="form-label" for="cityname"
+                                >Search for a city:</label
+                            >
 
-                        <input
-                            name="cityname"
-                            id="citysearch"
-                            type="text"
-                            autofocus="true"
-                            class="form-input"
-                        />
+                            <input
+                                name="cityname"
+                                id="citysearch"
+                                type="text"
+                                autofocus="true"
+                                class="form-input"
+                            />
 
-                        <button type="submit" class="btn">Search!</button>
-                    </form>
+                            <button type="submit" class="btn btn-primary">
+                                Search!
+                            </button>
+                        </form>
+                    </div>
 
-                    <div class="row">
+                    <div class="flex-row">
                         <div id="to-revisit"></div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-8">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 id="city">Tucson</h3>
+                        <p>Temp:<span id="temp"></span></p>
+                        <p>Wind:<span id="wind"></span></p>
+                        <p>Humidity:<span id="humid"></span></p>
+                        <p>UV Index:<span id="uvInd"></span></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h3 id="fiveDay">5 Day Forecast:</h3>
+                </div>
+
+                <div class="row">
+                    <!-- Day 1 of 5-Day Forecast -->
                     <div class="card">
                         <div class="card-body">
-                            <h3 id="city">Tucson</h3>
-                            <p>Temp:<span id="temp"></span></p>
-                            <p>Wind:<span id="wind"></span></p>
-                            <p>Humidity:<span id="humid"></span></p>
-                            <p>UV Index:<span id="uvInd"></span></p>
+                            <h4 class="card-title" id="card1">Date +1</h4>
+                            <p>icon PH</p>
+                            <p>Temp: <span id="temp1"></span></p>
+                            <p>Wind: <span id="wind1"></span></p>
+                            <p>Humidity: <span id="humid1"></span></p>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <h3 id="fiveDay">5 Day Forecast:</h3>
+                    <!-- Day 2 of 5-Day Forecast -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" id="card2">Date +2</h4>
+                            <p>icon PH</p>
+                            <p>Temp: <span id="temp2"></span></p>
+                            <p>Wind: <span id="wind2"></span></p>
+                            <p>Humidity: <span id="humid2"></span></p>
+                        </div>
                     </div>
 
-                    <div class="row">
-                        <!-- Day 1 of 5-Day Forecast -->
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title" id="card1">Date +1</h4>
-                                <p>icon PH</p>
-                                <p>Temp: <span id="temp1"></span></p>
-                                <p>Wind: <span id="wind1"></span></p>
-                                <p>Humidity: <span id="humid1"></span></p>
-                            </div>
+                    <!-- Day 3 of 5-Day Forecast -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" id="card3">Date +3</h4>
+                            <p>icon PH</p>
+                            <p>Temp: <span id="temp3"></span></p>
+                            <p>Wind: <span id="wind3"></span></p>
+                            <p>Humidity: <span id="humid3"></span></p>
                         </div>
+                    </div>
 
-                        <!-- Day 2 of 5-Day Forecast -->
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title" id="card2">Date +2</h4>
-                                <p>icon PH</p>
-                                <p>Temp: <span id="temp2"></span></p>
-                                <p>Wind: <span id="wind2"></span></p>
-                                <p>Humidity: <span id="humid2"></span></p>
-                            </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" id="card4">Date +4</h4>
+                            <p>icon PH</p>
+                            <p>Temp: <span id="temp4"></span></p>
+                            <p>Wind: <span id="wind4"></span></p>
+                            <p>Humidity: <span id="humid4"></span></p>
                         </div>
-
-                        <!-- Day 3 of 5-Day Forecast -->
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title" id="card3">Date +3</h4>
-                                <p>icon PH</p>
-                                <p>Temp: <span id="temp3"></span></p>
-                                <p>Wind: <span id="wind3"></span></p>
-                                <p>Humidity: <span id="humid3"></span></p>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title" id="card4">Date +4</h4>
-                                <p>icon PH</p>
-                                <p>Temp: <span id="temp4"></span></p>
-                                <p>Wind: <span id="wind4"></span></p>
-                                <p>Humidity: <span id="humid4"></span></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title" id="card5">Date +5</h4>
-                                <p>icon PH</p>
-                                <p>Temp: <span id="temp5"></span></p>
-                                <p>Wind: <span id="wind5"></span></p>
-                                <p>Humidity: <span id="humid5"></span></p>
-                            </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" id="card5">Date +5</h4>
+                            <p>icon PH</p>
+                            <p>Temp: <span id="temp5"></span></p>
+                            <p>Wind: <span id="wind5"></span></p>
+                            <p>Humidity: <span id="humid5"></span></p>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </main>
