@@ -1,5 +1,6 @@
 const formEl = document.querySelector("#user-form");
 const cityEl = document.querySelector("#citysearch");
+let city = "";
 
 // var apiUrl2 = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly&appid=' + apiKey + '&units=imperial';
 
@@ -32,14 +33,13 @@ const oneCall = function (lat, lon) {
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-
-                    $("#city").html(city);
                     $("#temp").html(data.current.temp + "&deg;F");
                     $("#wind").html(data.current.wind_speed + " MPH");
                     $("#humid").html(data.current.humidity + "&percnt;");
                     let uvi = data.current.uvi;
                     $("#uvi").html(uvi);
                     uviBg(uvi);
+                    fiveDay(data);
                 });
             } else {
                 alert('Error: City Not Found');
@@ -52,17 +52,27 @@ const oneCall = function (lat, lon) {
 
 };
 
+const fiveDay = function (data) {
+    for (let i = 0; i < 5; i++) {
+        $("#icon" + i).html("<img src='https://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png'>");
+        $("#max" + i).html(data.daily[i].temp.max);
+        $("#min" + i).html(data.daily[i].temp.min);
+        $("#wind" + i).html("<p>" + data.daily[i].wind_speed + "&percnt;");
+        $("#humid" + i).html("<p>" + data.daily[i].humidity + "&percnt;");
+    }
+}
+// Setting `uvi`'s bg color based on its index. From high to low: violet, red, orange, yellow, green.
 const uviBg = function (uvi) {
     if (uvi > 10) {
         $("#uvi").css("background-color", "#EE82EE")
     }
-    if (uvi > 7 && data.current.uvi < 11) {
+    if (uvi > 7 && uvi < 11) {
         $("#uvi").css("background-color", "red")
     }
-    if (uvi > 5 && data.current.uvi < 8) {
+    if (uvi > 5 && uvi < 8) {
         $("#uvi").css("background-color", "orange")
     }
-    if (uvi > 4 && data.current.uvi < 6) {
+    if (uvi > 4 && uvi < 6) {
         $("#uvi").css("background-color", "yellow")
     }
     if (uvi < 3) {
@@ -74,6 +84,7 @@ const uviBg = function (uvi) {
 const searchHandler = function (event) {
     event.preventDefault();
     let city = cityEl.value.trim();
+    $("#city").html(city);
 
     if (city) {
         latLon(city);
