@@ -55,7 +55,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <h3 id="city">Tucson</h3>
+                        <h3><span id="city"></span> <span id="datetime"></span></h3>
                         <p>Temp: <span id="temp"></span></p>
                         <p>Wind: <span id="wind"></span></p>
                         <p>Humidity: <span id="humid"></span></p>
@@ -71,7 +71,7 @@
                     <!-- Day 1 of 5-Day Forecast -->
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title" id="card0">Date +1</h4>
+                            <h4 class="card-title" id="date0"></h4>
                             <p id="icon0"></p>
                             <p>Temp: <span id="max0"></span></p>/<span id="min0"></span></p>
                             <p>Wind: <span id="wind0"></span></p>
@@ -82,7 +82,7 @@
                     <!-- Day 2 of 5-Day Forecast -->
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title" id="card1">Date +2</h4>
+                            <h4 class="card-title" id="date1"></h4>
                             <p id="icon1"></p>
                             <p>Temp: <span id="max1"></span></p>/<span id="min1"></span></p>
                             <p>Wind: <span id="wind1"></span></p>
@@ -93,7 +93,7 @@
                     <!-- Day 3 of 5-Day Forecast -->
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title" id="card2">Date +3</h4>
+                            <h4 class="card-title" id="date2"></h4>
                             <p id="icon2"></p>
                             <p>Temp: <span id="max2"></span></p>/<span id="min2"></span></p>
                             <p>Wind: <span id="wind2"></span></p>
@@ -104,7 +104,7 @@
                     <!-- Day 3 of 5-Day Forecast -->
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title" id="card3">Date +4</h4>
+                            <h4 class="card-title" id="date3"></h4>
                             <p id="icon3"></p>
                             <p>Temp: <span id="max3"></span></p>/<span id="min3"></span></p>
                             <p>Wind: <span id="wind3"></span></p>
@@ -114,7 +114,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title" id="card4">Date +5</h4>
+                            <h4 class="card-title" id="date4"></h4>
                             <p id="icon4"></p>
                             <p>Temp: <span id="max4"></span></p>/<span id="min4"></span></p>
                             <p>Wind: <span id="wind4"></span></p>
@@ -128,6 +128,7 @@
     </main>
 
     <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="./assets/script/script.js"></script>
     </body>

@@ -1,6 +1,12 @@
+// Declarations for Open Weather API requests
 const formEl = document.querySelector("#user-form");
 const cityEl = document.querySelector("#citysearch");
 let city = "";
+
+// Declarations for Moment.js API requests
+// Setting empty vars to pass info to later to display current date and time
+let datetime = null,
+    date = null;
 
 // var apiUrl2 = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly&appid=' + apiKey + '&units=imperial';
 
@@ -54,6 +60,8 @@ const oneCall = function (lat, lon) {
 
 const fiveDay = function (data) {
     for (let i = 0; i < 5; i++) {
+        let cardDate = new Date(data.daily[i + 1].dt * 1000).toLocaleDateString("en-US");
+        $("#date" + i).html(cardDate);
         $("#icon" + i).html("<img src='https://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png'>");
         $("#max" + i).html(data.daily[i].temp.max);
         $("#min" + i).html(data.daily[i].temp.min);
@@ -96,3 +104,35 @@ const searchHandler = function (event) {
 }
 
 formEl.addEventListener("submit", searchHandler);
+
+let currentHour = moment().format("H");
+setInterval(function (i) {
+    // This will cycle through all elements with ".dynamic"
+    $(".dynamic").each(function (i) {
+
+        // The iterator starts at 0. Adding 9 to iterator because the app starts at 9am
+        var offsetter = parseInt([i]) + 9;
+
+        // Comparing offsetter to currentHour and adding classes to the ".dynamic"s accordingly
+        if (offsetter < currentHour) {
+            $(this).addClass("past");
+        } else if (offsetter > currentHour) {
+            $(this).addClass("future");
+        } else {
+            $(this).addClass("present");
+        }
+    }), 60000
+});
+
+let update = function () {
+    date = moment(new Date())
+    datetime.html(date.format('dddd, MMMM Do, YYYY'));
+};
+
+// Declaring a function that fires when the document has finished loading
+$(document).ready(function () {
+    // Putting `#datetime` in a variable, then using `update()` and `setInterval()` to update the displayed time in it every second
+    datetime = $('#datetime')
+    update();
+    setInterval(update, 60000);
+});
