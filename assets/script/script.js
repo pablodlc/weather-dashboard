@@ -2,15 +2,18 @@
 const formEl = document.querySelector("#user-form");
 const cityEl = document.querySelector("#citysearch");
 let city = "";
+let citiesEl = $("#cities");
+let citySearchEl = "";
 
 // Declarations for Moment.js API requests
 // Setting empty vars to pass info to later to display current date and time
 let datetime = null,
     date = null;
 
-// var apiUrl2 = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly&appid=' + apiKey + '&units=imperial';
+// Declarations handling local storage and related buttons
 
 
+// Code to handle Open Weather data
 const latLon = function (city) {
     let apiUrl1 = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=829eec9644d40ff393c122e2b06045e8";
     fetch(apiUrl1)
@@ -18,9 +21,7 @@ const latLon = function (city) {
             if (response.ok) {
                 response.json().then(function (data) {
                     const { lat, lon } = data.coord;
-                    console.log(lat);
-                    console.log(lon);
-                    oneCall(lat, lon);
+                    oneCall(lat, lon, city);
                 });
             } else {
                 alert('Error: City Not Found');
@@ -33,12 +34,22 @@ const latLon = function (city) {
 
 };
 
-const oneCall = function (lat, lon) {
+const oneCall = function (lat, lon, city) {
     let apiUrl2 = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly&appid=829eec9644d40ff393c122e2b06045e8&units=imperial';
     fetch(apiUrl2)
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
+                    // I need to loop through the words in `city`, split them, capitalize them, the join them together again
+                    // const mySentence = "freeCodeCamp is an awesome resource";
+                    // const words = mySentence.split(" ");
+
+                    // for (let i = 0; i < words.length; i++) {
+                    //     words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+                    // }
+
+                    // words.join(" ");
+                    $("#city").html(city);
                     $("#temp").html(data.current.temp + "&deg;F");
                     $("#wind").html(data.current.wind_speed + " MPH");
                     $("#humid").html(data.current.humidity + "&percnt;");
@@ -89,40 +100,54 @@ const uviBg = function (uvi) {
 }
 
 
-const searchHandler = function (event) {
+// Code to create new buttons from user's city searches
+const cityButton = function (city) {
+    let savedCity = document.createElement("p");
+    savedCity.textContent = city;
+    $("#cities").append(savedCity);
+    savedCity.addEventListener("click", function () {
+        latLon(savedCity.textContent);
+    })
+    //                                  All this as an example to check if storage exits in the array
+    // if ($("#" + city + "Btn").length > 0) {
+    //     return
+    // }
+    // else {
+    //     let buttonHtml = '<button class="cityBtn" id="' + city + 'Btn">' + city + '</button><br />';
+    //     $("#cities").append(buttonHtml);
+    // }
+    //     let buttonHtml = '<button class="cityBtn" id="' + city + '"> ' + city + '</button> <br />';
+    //     $("#cities").append(buttonHtml);
+}
+
+
+// Code to handle local storage
+
+$("#search").click(function (event) {
     event.preventDefault();
-    let city = cityEl.value.trim();
+    let city = cityEl.value.trim().toLowerCase();
     $("#city").html(city);
 
     if (city) {
         latLon(city);
+        cityButton(city);
         cityEl.value = "";
     }
     else {
         alert("Please enter a city.");
     }
-}
-
-formEl.addEventListener("submit", searchHandler);
-
-let currentHour = moment().format("H");
-setInterval(function (i) {
-    // This will cycle through all elements with ".dynamic"
-    $(".dynamic").each(function (i) {
-
-        // The iterator starts at 0. Adding 9 to iterator because the app starts at 9am
-        var offsetter = parseInt([i]) + 9;
-
-        // Comparing offsetter to currentHour and adding classes to the ".dynamic"s accordingly
-        if (offsetter < currentHour) {
-            $(this).addClass("past");
-        } else if (offsetter > currentHour) {
-            $(this).addClass("future");
-        } else {
-            $(this).addClass("present");
-        }
-    }), 60000
 });
+
+// $("#cities").on("click", function (event) {
+//     event.preventDefault();
+//     let citySearchEl = $("#cities").text().trim();
+//     if (citySearchEl) {
+//         console.log(citySearchEl);
+//         latLon(citySearchEl);
+//         citySearchEl = "";
+//     }
+// });
+
 
 let update = function () {
     date = moment(new Date())
