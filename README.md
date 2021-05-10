@@ -36,3 +36,8 @@ This application can be found by clicking this link: [Weather Dashboard](https:/
 -   CSS + Bootstrap
 -   JavaScript
 -   jQuery
+
+## References
+
+_Activity 04.01.04/local-storage_ for a refresher in local storage syntax and calling data in local storage to load on the page at start.  
+My delete button from the **Work Day Scheduler** challenge.

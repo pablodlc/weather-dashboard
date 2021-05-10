@@ -8,8 +8,7 @@ let city = "";
 let datetime = null,
     date = null;
 
-// var apiUrl2 = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly&appid=' + apiKey + '&units=imperial';
-
+let deleteBtn = $("#delete");
 
 const latLon = function (city) {
     let apiUrl1 = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=829eec9644d40ff393c122e2b06045e8";
@@ -46,6 +45,7 @@ const oneCall = function (lat, lon) {
                     $("#uvi").html(uvi);
                     uviBg(uvi);
                     fiveDay(data);
+                    cityFromStorage = "";
                 });
             } else {
                 alert('Error: City Not Found');
@@ -89,40 +89,56 @@ const uviBg = function (uvi) {
 }
 
 
-const searchHandler = function (event) {
+// Code to create new buttons from user's city searches
+const cityButton = function (city) {
+    let cityFromStorage = city;
+    console.log(cityFromStorage);
+    $("#cities").append(`<button class='savedCitiesBtns'>` + cityFromStorage + `</button><br/>`);
+    $(".savedCitiesBtns").click(function () {
+        latLon(cityFromStorage);
+    })
+}
+
+
+// Code to handle local storage
+// Declarations handling local storage and related buttons
+function renderCities() {
+    // Retrieve the last email and password from localStorage using `getItem()`
+    let cityLs = localStorage.getItem("city");
+
+    // If they are null, return early from this function
+    if (cityLs === null) {
+        return;
+    }
+    cityButton(cityLs);
+    // Set the text of the 'userEmailSpan' and 'userPasswordSpan' to the corresponding values from localStorage
+    // userEmailSpan.textContent = email;
+    // userPasswordSpan.textContent = password;
+}
+
+$("#search").click(function (event) {
     event.preventDefault();
     let city = cityEl.value.trim();
     $("#city").html(city);
 
     if (city) {
         latLon(city);
+        cityButton(city);
+        localStorage.setItem("city", city);
         cityEl.value = "";
     }
     else {
         alert("Please enter a city.");
     }
-}
-
-formEl.addEventListener("submit", searchHandler);
-
-let currentHour = moment().format("H");
-setInterval(function (i) {
-    // This will cycle through all elements with ".dynamic"
-    $(".dynamic").each(function (i) {
-
-        // The iterator starts at 0. Adding 9 to iterator because the app starts at 9am
-        var offsetter = parseInt([i]) + 9;
-
-        // Comparing offsetter to currentHour and adding classes to the ".dynamic"s accordingly
-        if (offsetter < currentHour) {
-            $(this).addClass("past");
-        } else if (offsetter > currentHour) {
-            $(this).addClass("future");
-        } else {
-            $(this).addClass("present");
-        }
-    }), 60000
 });
+
+$(deleteBtn).click(function () {
+    let clear = confirm("Would you like to clear all items?");
+    if (clear) {
+        localStorage.clear();
+        location.reload();
+    }
+})
 
 let update = function () {
     date = moment(new Date())
@@ -134,5 +150,6 @@ $(document).ready(function () {
     // Putting `#datetime` in a variable, then using `update()` and `setInterval()` to update the displayed time in it every second
     datetime = $('#datetime')
     update();
-    setInterval(update, 60000);
+    setInterval(update, 600000);
+    renderCities();
 });
