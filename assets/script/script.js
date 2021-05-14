@@ -1,7 +1,9 @@
-// Declarations for Open Weather API requests
 const formEl = document.querySelector("#user-form");
 const cityEl = document.querySelector("#citysearch");
 let city = "";
+let cityArray = localStorage.getItem("citiesArray");
+let cityData = cityArray ? JSON.parse(cityArray) : [];
+console.log(cityData + ": this should be an array");
 let citiesEl = $("#cities");
 let citySearchEl = "";
 let deleteBtn = ("#delete");
@@ -128,11 +130,7 @@ function searchFromButton(clicked) {
 
 
 
-// Code to handle local storage
-const saveCity = function (city) {
-    cityArray.push(city);
-    localStorage.setItem("citiesArray", JSON.stringify(cityArray))
-}
+
 
 
 
@@ -143,7 +141,10 @@ $("#search").click(function (event) {
     $("#city").html(city);
 
     if (city) {
-        saveCity(city);
+        let cityComingIn = city;
+        cityData.push(cityComingIn);
+        localStorage.setItem("citiesArray", JSON.stringify(cityData))
+
         latLon(city);
         cityButton(city);
         cityEl.value = "";
@@ -164,22 +165,15 @@ $(document).ready(function () {
     datetime = $('#datetime')
     update();
     setInterval(update, 60000);
-    let foundCities = localStorage.getItem("citiesArray");
-    if (!foundCities) {
-        foundCities = [];
+
+    for (let i = 0; i < cityData.length; i++) {
+        console.log(cityData[i]);
+        let cityToAdd = document.createElement("button");
+        cityToAdd.textContent = cityData[i];
+        cityToAdd.id = cityData[i];
+        $("#cities").append(cityToAdd);
+        cityToAdd.onclick = function (event) {
+            searchFromButton(this.id);
+        };
     }
-    else {
-        foundCities = JSON.parse(foundCities);
-        console.log(foundCities);
-        for (let i = 0; i < foundCities.length; i++) {
-            console.log(foundCities[i]);
-            let cityToAdd = document.createElement("button");
-            cityToAdd.textContent = foundCities[i];
-            cityToAdd.id = foundCities[i];
-            $("#cities").append(cityToAdd);
-            cityToAdd.onclick = function (event) {
-                searchFromButton(this.id);
-            };
-        }
-    }
-});
+})
