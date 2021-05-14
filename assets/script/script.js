@@ -2,6 +2,9 @@
 const formEl = document.querySelector("#user-form");
 const cityEl = document.querySelector("#citysearch");
 let city = "";
+let cityArray = localStorage.getItem("citiesArray");
+// I forgot to save where I found this code using the `?` operand. But in order to understand what's happening I looked up Conditional (ternary) operator at MDN. The `?` is "the only Javascript operator that takes three operands." 1. Determining if `cityArray` exists; more specifically whether the `cityArray` condition is truthy.  If it's truthy (or as I understand it, `cityArray` exists), then it parses the data from local storage and saves that data to `CityData` as an array--all the code _before_ the colon. If `cityData` is falsy (or as I think of it, `cityData` does not exist), then the `?` operator executes the code _after_ the colon--it creates an empty array.   
+let cityData = cityArray ? JSON.parse(cityArray) : [];
 let citiesEl = $("#cities");
 let citySearchEl = "";
 let deleteBtn = ("#delete");
@@ -36,7 +39,6 @@ const latLon = function (city) {
             }
         })
         .catch(function (error) {
-            // Notice this `.catch()` getting chained onto the end of the `.then()` method
             alert("Unable to connect to Open Weather Map");
         });
 
