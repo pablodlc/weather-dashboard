@@ -23,7 +23,8 @@ header,
 .form-label,
 #city,
 #datetime,
-#fiveDay {
+#fiveDay,
+footer {
     font-family: "Happy Monkey", cursive;
 }
 
@@ -31,16 +32,13 @@ header,
     font-size: 18px;
 }
 
-main {
-    padding: 10px 0;
-}
-
 .container {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    margin-left: 20px;
-    margin-right: 20px;
+    position: relative;
+    margin: 20 auto;
+    padding: 10px 0;
 }
 
 .flex-row {
@@ -59,6 +57,7 @@ main {
 
 .card-body {
     background-color: var(--mustard);
+    text-align: center;
 }
 
 .card-body p {
@@ -89,7 +88,7 @@ main {
 }
 
 #currentWeather {
-    width: 500px;
+    width: 100%;
 }
 
 #cities {
@@ -123,10 +122,12 @@ button:hover {
     flex-direction: row;
     justify-content: space-evenly;
     padding-top: 10px;
+    visibility: hidden;
 }
 
 .fiveDay {
-    width: 200px;
+    display: flex;
+    justify-content: center;
 }
 
 .fiveDay p {
@@ -135,4 +136,17 @@ button:hover {
 
 #fiveDay {
     padding-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px 0 15px 0;
+    background: linear-gradient(to right, #1a535c 0%, #4ecdc4 100%);
+    color: var(--salmon);
+    text-shadow: 2px 2px var(--darkBlue);
+}
+
+footer i {
+    font-size: 35px;
+    color: var(--salmon);
 }

@@ -127,12 +127,14 @@ const cityButton = function (city) {
 // Here the button's id, which is also the city name, is passed into `latLon()`
 function searchFromButton(clicked) {
     cityText = clicked;
+    $("#forecast-cards").css("visibility", "visible");
     latLon(cityText);
 }
 
 // Here's where the `Search!` button functions are handles
 $("#search").click(function (event) {
     event.preventDefault();
+    $("#forecast-cards").css("visibility", "visible");
     let city = cityEl.value.trim().toLowerCase();
     // Here it changes the HTML `#city` to the city name from the input
     $("#city").html(city);
