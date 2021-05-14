@@ -1,22 +1,138 @@
+:root {
+    --darkBlue: #1a535c;
+    --lightBlue: #4ecdc4;
+    --salmon: #ff6b6b;
+    --mustard: #ffe66d;
+}
+
+body {
+    background-color: var(--lightBlue);
+    font-family: "Quicksand", sans-serif;
+    color: var(--darkBlue);
+}
+
+header {
+    text-align: center;
+    padding: 10px 0 5px 0;
+    background: linear-gradient(to right, #4ecdc4 0%, #1a535c 100%);
+    color: var(--salmon);
+    text-shadow: 2px 2px var(--darkBlue);
+}
+
+header,
+.form-label,
+#city,
+#datetime,
+#fiveDay {
+    font-family: "Happy Monkey", cursive;
+}
+
+#datetime {
+    font-size: 18px;
+}
+
+main {
+    padding: 10px 0;
+}
+
 .container {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    align-items: space-between;
-}
-
-#searchCol {
-    display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
-#fiveDay {
-    padding: 20px;
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.card h3,
+.card h4,
+.card h5,
+.card h6,
+.card .icon {
+    text-align: center;
+}
+
+.card-body {
+    background-color: var(--mustard);
+}
+
+.card-body p {
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+#searchCard {
+    width: 250px;
 }
 
 #user-form {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    text-align: center;
+    font-size: 20px;
+}
+
+.form-input {
+    width: 200px;
+    margin: 0 auto;
+}
+
+#delete {
+    background-color: var(--salmon);
+    outline: none;
+}
+
+#currentWeather {
+    width: 500px;
+}
+
+#cities {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: column-reverse;
+    padding-top: 10px;
+}
+
+button,
+.btn {
+    margin: 5px auto;
+    width: 175px;
+    padding: 10px;
+    outline: none;
+    border: 0.16em solid rgba(255, 255, 255, 0);
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    background-color: var(--darkBlue);
+    color: var(--mustard);
+}
+
+button:hover {
+    border-color: var(--mustard);
+    outline: none;
+}
+
+#forecast-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 10px;
+}
+
+.fiveDay {
+    width: 200px;
+}
+
+.fiveDay p {
+    font-size: 15px;
+}
+
+#fiveDay {
+    padding-top: 10px;
 }

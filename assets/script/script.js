@@ -16,7 +16,7 @@ let datetime = null,
 
 // Copy/Pasta delete button from my Work Day Scheduler homework
 $(deleteBtn).click(function () {
-    var clear = confirm("Would you like to clear all items?");
+    var clear = confirm("Would you like to clear your saved searches?");
     if (clear) {
         localStorage.clear();
         location.reload();
@@ -31,6 +31,7 @@ const latLon = function (city) {
             if (response.ok) {
                 response.json().then(function (data) {
                     const { lat, lon } = data.coord;
+                    console.log(lat + "lat, " + lon + "lon");
                     oneCall(lat, lon, city);
                 });
             } else {
@@ -53,6 +54,7 @@ const oneCall = function (lat, lon, city) {
                 response.json().then(function (data) {
                     // Here's where it updates HTML elements by matching the data to their ids.
                     $("#city").html(city);
+                    $("#currentIcon").html("<img src='https://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png'>");
                     $("#temp").html(data.current.temp + "&deg;F");
                     $("#wind").html(data.current.wind_speed + " MPH");
                     $("#humid").html(data.current.humidity + "&percnt;");
@@ -83,77 +85,78 @@ const fiveDay = function (data) {
         $("#icon" + i).html("<img src='https://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png'>");
         $("#max" + i).html(data.daily[i].temp.max);
         $("#min" + i).html(data.daily[i].temp.min);
-        $("#wind" + i).html("<p>" + data.daily[i].wind_speed + "&percnt;");
-        $("#humid" + i).html("<p>" + data.daily[i].humidity + "&percnt;");
+        $("#wind" + i).html(data.daily[i].wind_speed);
+        $("#humid" + i).html(data.daily[i].humidity + "&percnt;");
     }
 }
 // Setting `uvi`'s bg color based on its index. From high to low: violet, red, orange, yellow, green.
 const uviBg = function (uvi) {
     if (uvi > 10) {
-        $("#uvi").css("background-color", "#EE82EE")
+        $("#uvi").css({ "background-color": "#EE82EE", "color": "#ffe66d" })
     }
     if (uvi > 7 && uvi < 11) {
-        $("#uvi").css("background-color", "red")
+        $("#uvi").css({ "background-color": "red", "color": "#1a535c" })
     }
     if (uvi > 5 && uvi < 8) {
-        $("#uvi").css("background-color", "orange")
+        $("#uvi").css({ "background-color": "orange", "color": "#1a535c" })
     }
     if (uvi > 4 && uvi < 6) {
-        $("#uvi").css("background-color", "yellow")
+        $("#uvi").css({ "background-color": "yellow", "color": "#1a535c" })
     }
     if (uvi < 3) {
-        $("#uvi").css("background-color", "green")
+        $("#uvi").css({ "background-color": "green", "color": "#ffe66d" })
     }
 }
 
 
 // Code to create new buttons from user's city searches
 const cityButton = function (city) {
+    // I could've used jQuery here, but was struggling with a bug somewhere between adding the click event and maintaining the city name as the id, so I went vanilla.
     let savedCity = document.createElement("button");
     savedCity.textContent = city;
     savedCity.id = city;
+    savedCity.class = "cityBtn";
+    // Here it adds the new button to `#cities` div
     $("#cities").append(savedCity);
+    // Adds  a click event to the button
     savedCity.onclick = function (event) {
         searchFromButton(this.id);
     };
 }
 
-
+// Here the button's id, which is also the city name, is passed into `latLon()`
 function searchFromButton(clicked) {
     cityText = clicked;
     latLon(cityText);
 }
 
-
-
-
-
-
-
-
-
-
-
-
+// Here's where the `Search!` button functions are handles
 $("#search").click(function (event) {
     event.preventDefault();
     let city = cityEl.value.trim().toLowerCase();
+    // Here it changes the HTML `#city` to the city name from the input
     $("#city").html(city);
 
     if (city) {
         let cityComingIn = city;
+        // Here the function is pushing the data of `cityComingIn` to `cityData`, the array of the searched cities, then saves it to local storage.
         cityData.push(cityComingIn);
         localStorage.setItem("citiesArray", JSON.stringify(cityData))
 
+        // Then it calls `latLon()` passing in the city as an arguement
         latLon(city);
+        // Calls `cityButton()` to generate a button by manipulating the DOM, passing the city name
         cityButton(city);
+        // Clears the input content
         cityEl.value = "";
     }
     else {
+        // My amazing girlfriend is from New Hampshire
         alert("Try Hampton Falls. The people are lovely.");
     }
 });
 
+// Stole this from my Day Planner. This displays the current date on the page, formatted to my liking.  Then updated every hour later.
 let update = function () {
     date = moment(new Date())
     datetime.html(date.format('dddd, MMMM Do, YYYY'));
@@ -166,12 +169,17 @@ $(document).ready(function () {
     update();
     setInterval(update, 60000);
 
+    // Using a for loop to iterate through local storage
     for (let i = 0; i < cityData.length; i++) {
-        console.log(cityData[i]);
+        // creates a button at each iteration
         let cityToAdd = document.createElement("button");
+        // with the city name as the text content
         cityToAdd.textContent = cityData[i];
+        // sets the button's id to the current city name in the iteration
         cityToAdd.id = cityData[i];
+        // appends the button to `#cities` div
         $("#cities").append(cityToAdd);
+        // adds a click event to the new button
         cityToAdd.onclick = function (event) {
             searchFromButton(this.id);
         };
