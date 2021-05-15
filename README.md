@@ -2,7 +2,11 @@
 
 ## Description
 
-This application can be found by clicking this link: [Weather Dashboard](https://pablodlc.github.io/weather-dashboard/).
+This application can be found by clicking this link: [Weather Dashboard](https://pablodlc.github.io/weather-dashboard/).  
+![](./assets/images/weather-dashboard.gif)  
+**Weather Dashboard** is in interactive application where a user can search for a city, get its current weather condition and the weather conditions for the next five days. When the user searches for a city, a button is programmatically created. The button's text content is the searched city's name. Clicking on that button repeats a search for that city. All the cities and their buttons are saved to local storage, so they're persistent. This application uses three APIs: Moment.js for handling dates, the OpenWeather API to search by city name and get the `lat` and `lon`, then plug them in to OpenWeather OneCall API to find the weather conditions. I couldn't figure out how else to use the OneCall API, so I used the old one in conjunction with it.
+
+The application was created keeping this User Story and Acceptance Criteria in mind:
 
 ### User Story
 
@@ -24,15 +28,19 @@ This application can be found by clicking this link: [Weather Dashboard](https:/
 > WHEN I click on a city in the search history  
 > THEN I am again presented with current and future conditions for that city
 
-## APIs Used
+## External Resources
 
--   OpenWeather One Call API
+-   OpenWeathermap.org Weather API
+-   OpenWeathermap.org WeatherOneCall API
 -   Moment.js
--   Open Iconic
+-   Google Fonts
+-   Font Awesome
 
 ## Technologies Used
 
--   HTML
--   CSS + Bootstrap
--   JavaScript
 -   jQuery
+-   Bootstrap
+
+## Future Developments
+
+Any possible future developments would be cosmetic. A current bug is that if there are enough of them, the buttons stack behind the footer. I would also consider how to update the spacing of teh text, as it makes the cards a little big.
