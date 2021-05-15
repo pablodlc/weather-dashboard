@@ -3,7 +3,6 @@ const cityEl = document.querySelector("#citysearch");
 let city = "";
 let cityArray = localStorage.getItem("citiesArray");
 let cityData = cityArray ? JSON.parse(cityArray) : [];
-console.log(cityData + ": this should be an array");
 let citiesEl = $("#cities");
 let citySearchEl = "";
 let deleteBtn = ("#delete");
@@ -33,7 +32,6 @@ const latLon = function (city) {
             if (response.ok) {
                 response.json().then(function (data) {
                     const { lat, lon } = data.coord;
-                    console.log(lat + "lat, " + lon + "lon");
                     oneCall(lat, lon, city);
                 });
             } else {
