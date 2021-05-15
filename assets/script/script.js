@@ -25,6 +25,8 @@ $(deleteBtn).click(function () {
 
 // If successful, `latLon()` searches for the city input from the `city` parameter, then pulls out the latitude and longitude. After it has that data, it calls `oneCall()` passing in the lat and lon
 const latLon = function (city) {
+    // My forecast cards are kinda ugly before they're populated with data. Because of that, I made set their `visibility` to `hidden` in the CSS on page load. This function is always called when the cards are about to be populated with data, so I make them visible them here.
+    $("#forecast-cards").css("visibility", "visible");
     let apiUrl1 = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=829eec9644d40ff393c122e2b06045e8";
     fetch(apiUrl1)
         .then(function (response) {
@@ -83,9 +85,9 @@ const fiveDay = function (data) {
         let cardDate = new Date(data.daily[i + 1].dt * 1000).toLocaleDateString("en-US");
         $("#date" + i).html(cardDate);
         $("#icon" + i).html("<img src='https://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png'>");
-        $("#max" + i).html(data.daily[i].temp.max);
-        $("#min" + i).html(data.daily[i].temp.min);
-        $("#wind" + i).html(data.daily[i].wind_speed);
+        $("#max" + i).html(data.daily[i].temp.max + "&deg;F");
+        $("#min" + i).html(data.daily[i].temp.min + "&deg;F");
+        $("#wind" + i).html(data.daily[i].wind_speed + " MPH");
         $("#humid" + i).html(data.daily[i].humidity + "&percnt;");
     }
 }
@@ -127,14 +129,12 @@ const cityButton = function (city) {
 // Here the button's id, which is also the city name, is passed into `latLon()`
 function searchFromButton(clicked) {
     cityText = clicked;
-    $("#forecast-cards").css("visibility", "visible");
     latLon(cityText);
 }
 
 // Here's where the `Search!` button functions are handles
 $("#search").click(function (event) {
     event.preventDefault();
-    $("#forecast-cards").css("visibility", "visible");
     let city = cityEl.value.trim().toLowerCase();
     // Here it changes the HTML `#city` to the city name from the input
     $("#city").html(city);
@@ -154,7 +154,7 @@ $("#search").click(function (event) {
     }
     else {
         // My amazing girlfriend is from New Hampshire
-        alert("Try Hampton Falls. The people are lovely.");
+        alert("Please enter a city. Try Hampton Falls. The people are lovely.");
     }
 });
 
